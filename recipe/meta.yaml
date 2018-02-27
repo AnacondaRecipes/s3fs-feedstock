@@ -12,14 +12,12 @@ source:
 build:
   number: 0
   script: python setup.py install --single-version-externally-managed --record=record.txt
-  noarch: python
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
     - boto3
-
   run:
     - python
     - boto3
