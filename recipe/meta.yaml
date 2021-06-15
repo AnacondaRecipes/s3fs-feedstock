@@ -19,23 +19,31 @@ requirements:
     - python >=3.6
     - setuptools
     - pip
+    - wheel
 
   run:
     - python >=3.6
     - aiobotocore
     - botocore
-    - fsspec >=0.8.0
+    - fsspec {{ version }}
 
 
 test:
   imports:
     - s3fs
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: http://s3fs.readthedocs.io/en/latest/
-  license: BSD 3-Clause
+  license: BSD-3-Clause
+  license_family: BSD
   summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
+  dev_url: https://github.com/dask/s3fs
+  doc_url: https://s3fs.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
