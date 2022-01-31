@@ -27,7 +27,6 @@ requirements:
     - aiohttp >=3.7.1,<4
     - fsspec {{ version }}
 
-
 test:
   imports:
     - s3fs
@@ -38,7 +37,7 @@ test:
     - pip check
 
 about:
-  home: http://s3fs.readthedocs.io/en/latest/
+  home: https://s3fs.readthedocs.io/en/latest/
   license: BSD-3-Clause
   license_family: BSD
   summary: Convenient Filesystem interface over S3
