@@ -1,4 +1,4 @@
-{% set version = "2022.1.0" %}
+{% set version = "2022.10.0" %}
 
 package:
   name: s3fs
@@ -7,12 +7,11 @@ package:
 source:
   fn: s3fs-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/s/s3fs/s3fs-{{ version }}.tar.gz
-  sha256: 6bafc1f6b4e935ea59512c0f38d5cb9c299dbbfe738e40c3d1de8f67b4ee1fd4
+  sha256: e8deb80f20bd0b2059141b874fdb9d6aeb8cce35312ea5f2c02b225a78a00406
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
-  noarch: python
 
 requirements:
   host:
