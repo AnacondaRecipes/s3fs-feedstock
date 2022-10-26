@@ -23,7 +23,7 @@ requirements:
   run:
     - python
     - aiobotocore ==2.4.0
-    - aiohttp!=4.0.0a0, !=4.0.0a1
+    - aiohttp !=4.0.0a0, !=4.0.0a1
     - fsspec {{ version }}
 
 test:
@@ -36,13 +36,17 @@ test:
     - pip check
 
 about:
+  description : |
+    S3FS builds on aiobotocore to provide a convenient Python filesystem interface for S3.
   home: https://s3fs.readthedocs.io/en/latest/
   license: BSD-3-Clause
   license_family: BSD
   summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
+  license_url: https://github.com/fsspec/s3fs/blob/{{ version }}/LICENSE.txt
   dev_url: https://github.com/dask/s3fs
   doc_url: https://s3fs.readthedocs.io/en/latest/
+  doc_source_url: https://github.com/fsspec/s3fs/tree/{{ version }}/docs
 
 extra:
   recipe-maintainers:
