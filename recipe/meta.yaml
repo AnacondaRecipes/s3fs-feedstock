@@ -52,3 +52,6 @@ extra:
     - mrocklin
     - koverholt
     - tomaugspurger
+  skip-lints:
+    - missing_doc_source_url
+    - missing_license_url
