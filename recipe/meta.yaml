@@ -44,7 +44,7 @@ about:
   summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
   dev_url: https://github.com/dask/s3fs
-  doc_url: https://s3fs.readthedocs.io/en/latest/
+  doc_url: https://s3fs.readthedocs.io/
 
 extra:
   recipe-maintainers:
