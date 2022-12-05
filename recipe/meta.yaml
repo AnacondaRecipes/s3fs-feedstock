@@ -43,10 +43,8 @@ about:
   license_family: BSD
   summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
-  license_url: https://github.com/fsspec/s3fs/blob/{{ version }}/LICENSE.txt
   dev_url: https://github.com/dask/s3fs
   doc_url: https://s3fs.readthedocs.io/en/latest/
-  doc_source_url: https://github.com/fsspec/s3fs/tree/{{ version }}/docs
 
 extra:
   recipe-maintainers:
