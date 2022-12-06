@@ -1,4 +1,4 @@
-{% set version = "2022.10.0" %}
+{% set version = "2022.11.0" %}
 
 package:
   name: s3fs
@@ -7,10 +7,10 @@ package:
 source:
   fn: s3fs-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/s/s3fs/s3fs-{{ version }}.tar.gz
-  sha256: e8deb80f20bd0b2059141b874fdb9d6aeb8cce35312ea5f2c02b225a78a00406
+  sha256: 10c5ac283a4f5b67ffad6d1f25ff7ee026142750c5c5dc868746cd904f617c33
 
 build:
-  skip: True #[py<37]
+  skip: True  # [py<37]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -23,7 +23,7 @@ requirements:
 
   run:
     - python
-    - aiobotocore ==2.4.0
+    - aiobotocore 2.4.*
     - aiohttp !=4.0.0a0,!=4.0.0a1
     - fsspec {{ version }}
 
@@ -43,10 +43,8 @@ about:
   license_family: BSD
   summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
-  license_url: https://github.com/fsspec/s3fs/blob/{{ version }}/LICENSE.txt
   dev_url: https://github.com/dask/s3fs
-  doc_url: https://s3fs.readthedocs.io/en/latest/
-  doc_source_url: https://github.com/fsspec/s3fs/tree/{{ version }}/docs
+  doc_url: https://s3fs.readthedocs.io/
 
 extra:
   recipe-maintainers:
@@ -54,3 +52,6 @@ extra:
     - mrocklin
     - koverholt
     - tomaugspurger
+  skip-lints:
+    - missing_doc_source_url
+    - missing_license_url
