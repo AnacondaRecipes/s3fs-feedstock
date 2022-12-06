@@ -23,7 +23,7 @@ requirements:
 
   run:
     - python
-    - aiobotocore >=2.4.0,==2.4.*
+    - aiobotocore 2.4.*
     - aiohttp !=4.0.0a0,!=4.0.0a1
     - fsspec {{ version }}
 
