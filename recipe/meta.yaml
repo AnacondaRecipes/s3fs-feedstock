@@ -1,4 +1,4 @@
-{% set version = "2023.3.0" %}
+{% set version = "2023.4.0" %}
 
 package:
   name: s3fs
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/s/s3fs/s3fs-{{ version }}.tar.gz
-  sha256: 5c154ded38e3c3d8f0eba7fec2706f29b41e0c395f19fbfef3ba8e70c685b049
+  sha256: 963ee2e070e03e2952d535dbc6fd2b341869fcd16006cf74b90bcf39fd26cded
 
 build:
   skip: true  # [py<38]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -21,7 +21,7 @@ requirements:
     - wheel
   run:
     - python
-    - aiobotocore >=2.4.2,<2.5
+    - aiobotocore >=2.5.0,<2.6.0
     - aiohttp !=4.0.0a0,!=4.0.0a1
     - fsspec {{ version }}
 
