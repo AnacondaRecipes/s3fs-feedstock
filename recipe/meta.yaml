@@ -1,4 +1,4 @@
-{% set version = "2023.4.0" %}
+{% set version = "2023.10.0" %}
 
 package:
   name: s3fs
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/s/s3fs/s3fs-{{ version }}.tar.gz
-  sha256: 963ee2e070e03e2952d535dbc6fd2b341869fcd16006cf74b90bcf39fd26cded
+  sha256: c40f238ccc9fefff3f6d09d4b5762abd6c913ba42e1a328976b54d038901b835
 
 build:
   skip: true  # [py<38]
@@ -21,7 +21,7 @@ requirements:
     - wheel
   run:
     - python
-    - aiobotocore >=2.5.0,<2.6.0
+    - aiobotocore >=2.7.0,<2.8.0
     - aiohttp !=4.0.0a0,!=4.0.0a1
     - fsspec {{ version }}
 
@@ -36,7 +36,7 @@ test:
 about:
   description : |
     S3FS builds on aiobotocore to provide a convenient Python filesystem interface for S3.
-  home: https://s3fs.readthedocs.io/en/latest/
+  home: https://s3fs.readthedocs.io/
   license: BSD-3-Clause
   license_family: BSD
   summary: Convenient Filesystem interface over S3
