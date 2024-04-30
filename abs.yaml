@@ -1,4 +1,0 @@
-channels:
-  - https://staging.continuum.io/prefect/fs/botocore-feedstock/pr58/dab749f
-  - https://staging.continuum.io/prefect/fs/filesystem-spec-feedstock/pr15/7514e79
-  - https://staging.continuum.io/prefect/fs/aiobotocore-feedstock/pr17/97c85a6
