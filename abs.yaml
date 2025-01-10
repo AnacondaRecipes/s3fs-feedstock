@@ -1,5 +1,2 @@
-build_env_vars:
-  ANACONDA_ROCKET_ENABLE_PY313 : yes
-
 channels:
   - https://staging.continuum.io/prefect/fs/filesystem-spec-feedstock/pr19/2466809
