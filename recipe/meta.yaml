@@ -11,8 +11,9 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  # aiobotocore 2.4.* is not avaliable for py>311
+  skip: True  # [py<37 or py>311]
 
 requirements:
   host:
