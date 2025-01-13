@@ -1,18 +1,19 @@
+{% set name = "s3fs" %}
 {% set version = "2022.11.0" %}
 
 package:
-  name: s3fs
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: s3fs-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/s/s3fs/s3fs-{{ version }}.tar.gz
-  sha256: 10c5ac283a4f5b67ffad6d1f25ff7ee026142750c5c5dc868746cd904f617c33
+  url: https://github.com/fsspec/s3fs/archive/refs/tags/2022.11.0.tar.gz
+  sha256: 8957b7e1acadf00e9201da6386d55593ce6478a3b392a1d06c3758bbf78ece5d
 
 build:
-  skip: True  # [py<37]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  # aiobotocore 2.4.* is not avaliable for py>311
+  skip: True  # [py<37 or py>311]
 
 requirements:
   host:
@@ -20,20 +21,33 @@ requirements:
     - setuptools
     - pip
     - wheel
-
   run:
     - python
     - aiobotocore 2.4.*
+    - fsspec =={{ version }}
     - aiohttp !=4.0.0a0,!=4.0.0a1
-    - fsspec {{ version }}
+
+# This tests failed when trying to create the bucket in the S3 mock moto_server
+# botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "http://127.0.0.1:5555/test"
+{% set ignore_tests = " --ignore=s3fs/tests/test_mapping.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}
 
 test:
+  source_files:
+    - s3fs
+    - pytest.ini
   imports:
     - s3fs
-  requires:
-    - pip
   commands:
     - pip check
+    - pytest -v {{ ignore_tests }}
+  requires:
+    - pip
+    - pytest >=4.2.0
+    - urllib3
+    - requests
+    - moto >=4
+    - flask
 
 about:
   description : |
@@ -52,6 +66,3 @@ extra:
     - mrocklin
     - koverholt
     - tomaugspurger
-  skip-lints:
-    - missing_doc_source_url
-    - missing_license_url
