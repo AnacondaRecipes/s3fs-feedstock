@@ -10,10 +10,12 @@ source:
   sha256: 8957b7e1acadf00e9201da6386d55593ce6478a3b392a1d06c3758bbf78ece5d
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   # aiobotocore 2.4.* is not avaliable for py>311
   skip: True  # [py<37 or py>311]
+  # moto>=4 is not avaliable on s390x
+  skip: True  # [s390x]
 
 requirements:
   host:
