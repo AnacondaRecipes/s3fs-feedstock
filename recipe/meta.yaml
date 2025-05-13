@@ -26,6 +26,13 @@ requirements:
     - aiohttp !=4.0.0a0,!=4.0.0a1
     - fsspec {{ version }}
 
+# Separators error on windows:
+# E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
+# E ?        ^^        ^^   ^^                       ^^        ^^                             ^^      ^^...
+{% set ignore_tests = "" %}
+{% set ignore_tests = " --ignore=s3fs/tests/derived/s3fs_test.py" %}  # [win]
+{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}  # [win]
+
 test:
   source_files:
     - s3fs
@@ -35,7 +42,7 @@ test:
     - pip check
     # >  fs.pipe_file(fs_target, b"data", mode="create")
     # E  Failed: DID NOT RAISE <class 'FileExistsError'>
-    - pytest -v -k "not (test_pipe_exclusive)" s3fs/tests
+    - pytest -v {{ ignore_tests }} -k "not (test_pipe_exclusive)" s3fs/tests
   requires:
     - pip
     - pytest
