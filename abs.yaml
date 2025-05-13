@@ -1,6 +1,0 @@
-channels:
-  - https://staging.continuum.io/prefect/fs/jsonschema-path-feedstock/pr3/db370ef
-  - https://staging.continuum.io/prefect/fs/openapi-spec-validator-feedstock/pr4/dd813e0
-  - https://staging.continuum.io/prefect/fs/py-partiql-parser-feedstock/pr2/90862c4
-  - https://staging.continuum.io/prefect/fs/joserfc-feedstock/pr2/a9e830f
-  - https://staging.continuum.io/prefect/fs/moto-feedstock/pr37/28223cf
