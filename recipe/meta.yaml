@@ -1,5 +1,5 @@
 {% set name = "s3fs" %}
-{% set version = "2025.3.2" %}
+{% set version = "2025.5.1" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsspec/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: bb3d8fa578e4f27876249eab2a53abf134a78463c9f7a6b87ad0f0886cbae1fe
+  sha256: 8845600303ba891f8e21d137ba4664942c572d1509ab7ab56f5db37abb328fb2
 
 build:
   number: 0
@@ -38,8 +38,12 @@ test:
     - s3fs
   imports:
     - s3fs
+    - s3fs.core
+    - s3fs.errors
+    - s3fs.utils
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # >  fs.pipe_file(fs_target, b"data", mode="create")
     # E  Failed: DID NOT RAISE <class 'FileExistsError'>
     - pytest -v {{ ignore_tests }} -k "not (test_pipe_exclusive)" s3fs/tests
@@ -51,15 +55,15 @@ test:
     - moto >=4
 
 about:
-  description : |
-    S3FS builds on aiobotocore to provide a convenient Python filesystem interface for S3.
-  home: https://s3fs.readthedocs.io/
+  home: https://s3fs.readthedocs.io
   license: BSD-3-Clause
   license_family: BSD
-  summary: Convenient Filesystem interface over S3
   license_file: LICENSE.txt
+  summary: Convenient Filesystem interface over S3
+  description : |
+    S3FS builds on aiobotocore to provide a convenient Python filesystem interface for S3.
   dev_url: https://github.com/dask/s3fs
-  doc_url: https://s3fs.readthedocs.io/
+  doc_url: https://s3fs.readthedocs.io
 
 extra:
   recipe-maintainers:
