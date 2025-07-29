@@ -49,7 +49,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v "not ({{ tests_to_skip }})" s3fs/tests
+    - pytest -v -k "not ({{ tests_to_skip }})" s3fs/tests
   requires:
     - pip
     - pytest >=4.2.0
