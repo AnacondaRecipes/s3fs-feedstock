@@ -1,5 +1,5 @@
 {% set name = "s3fs" %}
-{% set version = "2025.7.0" %}
+{% set version = "2025.10.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsspec/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 0d98e0b4923198dd1bc36b712ea751caac4286c92733917f97f4f4f95eea4b69
+  sha256: 6a405cbf1ff6edaf6e95e1af68cf1f3ee71e0d07980778dea73bb21e577b58bf
 
 build:
   number: 0
@@ -24,7 +24,7 @@ requirements:
     - python
     - aiobotocore >=2.5.4,<3.0.0
     - aiohttp !=4.0.0a0,!=4.0.0a1
-    - fsspec {{ version }}
+    - fsspec ==2025.10.0
 
 # Separators error on windows:
 # E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
@@ -62,6 +62,8 @@ test:
     - pytest >=4.2.0
     - pytest-asyncio
     - requests
+    - flask
+    - flask-cors
     - moto >=4
 
 about:
@@ -70,7 +72,7 @@ about:
   license_family: BSD
   license_file: LICENSE.txt
   summary: Convenient Filesystem interface over S3
-  description : |
+  description: |
     S3FS builds on aiobotocore to provide a convenient Python filesystem interface for S3.
   dev_url: https://github.com/fsspec/s3fs
   doc_url: https://s3fs.readthedocs.io
