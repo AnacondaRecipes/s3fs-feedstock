@@ -1,12 +1,5 @@
 {% set name = "s3fs" %}
-{% set version = "2026.1.0" %}
-{% set ignore_tests = "" %}
-{% set ignore_tests = " --ignore=s3fs/tests/derived/s3fs_test.py" %}  # [win]
-{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}  # [win]
-{% set tests_to_skip = "test_pipe_exclusive" %}
-{% set tests_to_skip = tests_to_skip + " or test_pipe_exclusive_big_after_small" %}
-{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_big_after_small" %}
-{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_small" %}
+{% set version = "2025.10.0" %}
 
 package:
   name: {{ name }}
@@ -14,11 +7,11 @@ package:
 
 source:
   url: https://github.com/fsspec/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 19584e127535694aa6d55ca4c8e8c763e93bcc89dba15eda8cec090d28ddd542
+  sha256: 6a405cbf1ff6edaf6e95e1af68cf1f3ee71e0d07980778dea73bb21e577b58bf
 
 build:
   number: 0
-  skip: true  # [py<310]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -29,20 +22,29 @@ requirements:
     - wheel
   run:
     - python
-    - aiobotocore >=2.5.4,<4.0.0
+    - aiobotocore >=2.5.4,<3.0.0
     - aiohttp !=4.0.0a0,!=4.0.0a1
-    - fsspec ==2026.1.0
+    - fsspec ==2025.10.0
 
 # Separators error on windows:
 # E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
 # E ?        ^^        ^^   ^^                       ^^        ^^                             ^^      ^^...
+{% set ignore_tests = "" %}
+{% set ignore_tests = " --ignore=s3fs/tests/derived/s3fs_test.py" %}  # [win]
+{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}  # [win]
+
 # fs.pipe_file(fs_target, b"data", mode="create")
 # Failed: DID NOT RAISE <class 'FileExistsError'>
+{% set tests_to_skip = "test_pipe_exclusive" %}
 # Failed: DID NOT RAISE <class 'FileExistsError'>
+{% set tests_to_skip = tests_to_skip + " or test_pipe_exclusive_big_after_small" %}
 # s3.put(fn, f"{test_bucket_name}/afile", mode="create", chunksize=chunksize)
 # Failed: DID NOT RAISE <class 'FileExistsError'>
+{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_big_after_small" %}
 # s3.put(fn, f"{test_bucket_name}/afile", mode="create")
 # Failed: DID NOT RAISE <class 'FileExistsError'>
+{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_small" %}
+
 test:
   source_files:
     - s3fs
