@@ -1,5 +1,5 @@
 {% set name = "s3fs" %}
-{% set version = "2025.10.0" %}
+{% set version = "2026.1.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsspec/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 6a405cbf1ff6edaf6e95e1af68cf1f3ee71e0d07980778dea73bb21e577b58bf
+  sha256: 19584e127535694aa6d55ca4c8e8c763e93bcc89dba15eda8cec090d28ddd542
 
 build:
   number: 0
