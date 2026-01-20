@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/fsspec/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 19584e127535694aa6d55ca4c8e8c763e93bcc89dba15eda8cec090d28ddd542
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: b7a352dfb9553a2263b7ea4575d90cd3c64eb76cfc083b99cb90b36b31e9d09d
 
 build:
   number: 0
