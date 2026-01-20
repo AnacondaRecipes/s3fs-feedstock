@@ -65,6 +65,10 @@ test:
     - flask
     - flask-cors
     - moto >=4
+  downstreams:
+    # Make sure new releases of this package don't break SF packages!!!
+    - snowpark-connect
+    - snowflake-ml-python
 
 about:
   home: https://s3fs.readthedocs.io
