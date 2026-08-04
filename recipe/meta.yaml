@@ -1,13 +1,34 @@
 {% set name = "s3fs" %}
-{% set version = "2026.4.0" %}
+{% set version = "2026.7.0" %}
+{% set ignore_tests = "" %}
+{% set ignore_tests = " --ignore=s3fs/tests/derived/s3fs_test.py" %}  # [win]
+{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}  # [win]
+{% set tests_to_skip = "test_pipe_exclusive" %}
+{% set tests_to_skip = tests_to_skip + " or test_pipe_exclusive_big_after_small" %}
+{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_big_after_small" %}
+{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_small" %}
 
+# Separators error on windows:
+# E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
+# E ?        ^^        ^^   ^^                       ^^        ^^                             ^^      ^^...
+# fs.pipe_file(fs_target, b"data", mode="create")
+# Failed: DID NOT RAISE <class 'FileExistsError'>
+# Failed: DID NOT RAISE <class 'FileExistsError'>
+# s3.put(fn, f"{test_bucket_name}/afile", mode="create", chunksize=chunksize)
+# Failed: DID NOT RAISE <class 'FileExistsError'>
+# s3.put(fn, f"{test_bucket_name}/afile", mode="create")
+# Failed: DID NOT RAISE <class 'FileExistsError'>
+# Make sure new releases of this package don't break SF packages!!!
+#  downstreams:
+#    - snowpark-connect
+#    - snowflake-ml-python
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5bdce0abb00b0435ee150807a45fea727451dbc22de4cbc116464f8504ab9d37
+  sha256: 76b062d1b2bc7bf4bcd9e7d8f1eb2b5dd9d5cee96ce888664c4ddb5f563146bf
 
 build:
   number: 0
@@ -23,27 +44,8 @@ requirements:
   run:
     - python
     - aiobotocore >=2.19.0,<4.0.0
-    - aiohttp !=4.0.0a0,!=4.0.0a1
-    - fsspec =={{ version }}
-
-# Separators error on windows:
-# E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
-# E ?        ^^        ^^   ^^                       ^^        ^^                             ^^      ^^...
-{% set ignore_tests = "" %}
-{% set ignore_tests = " --ignore=s3fs/tests/derived/s3fs_test.py" %}  # [win]
-{% set ignore_tests = ignore_tests + " --ignore=s3fs/tests/test_s3fs.py" %}  # [win]
-
-# fs.pipe_file(fs_target, b"data", mode="create")
-# Failed: DID NOT RAISE <class 'FileExistsError'>
-{% set tests_to_skip = "test_pipe_exclusive" %}
-# Failed: DID NOT RAISE <class 'FileExistsError'>
-{% set tests_to_skip = tests_to_skip + " or test_pipe_exclusive_big_after_small" %}
-# s3.put(fn, f"{test_bucket_name}/afile", mode="create", chunksize=chunksize)
-# Failed: DID NOT RAISE <class 'FileExistsError'>
-{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_big_after_small" %}
-# s3.put(fn, f"{test_bucket_name}/afile", mode="create")
-# Failed: DID NOT RAISE <class 'FileExistsError'>
-{% set tests_to_skip = tests_to_skip + " or test_put_exclusive_small" %}
+    - aiohttp !=4.0.0a0,!=4.0.0a1,>=3.9.0
+    - fsspec >=2026.7.0,<2026.7.1
 
 test:
   source_files:
@@ -65,10 +67,6 @@ test:
     - flask
     - flask-cors
     - moto >=4
-# Make sure new releases of this package don't break SF packages!!!
-#  downstreams:
-#    - snowpark-connect
-#    - snowflake-ml-python
 
 about:
   home: https://s3fs.readthedocs.io
