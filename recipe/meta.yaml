@@ -1,5 +1,5 @@
 {% set name = "s3fs" %}
-{% set version = "2026.4.0" %}
+{% set version = "2026.7.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5bdce0abb00b0435ee150807a45fea727451dbc22de4cbc116464f8504ab9d37
+  sha256: 76b062d1b2bc7bf4bcd9e7d8f1eb2b5dd9d5cee96ce888664c4ddb5f563146bf
 
 build:
   number: 0
@@ -23,7 +23,7 @@ requirements:
   run:
     - python
     - aiobotocore >=2.19.0,<4.0.0
-    - aiohttp !=4.0.0a0,!=4.0.0a1
+    - aiohttp >=3.9.0,!=4.0.0a0,!=4.0.0a1
     - fsspec =={{ version }}
 
 # Separators error on windows:
@@ -56,7 +56,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v {{ ignore_tests }} -k "not ({{ tests_to_skip }})" s3fs/tests
+    - pytest -vv {{ ignore_tests }} -k "not ({{ tests_to_skip }})" s3fs/tests
   requires:
     - pip
     - pytest >=4.2.0
@@ -66,9 +66,9 @@ test:
     - flask-cors
     - moto >=4
 # Make sure new releases of this package don't break SF packages!!!
-#  downstreams:
-#    - snowpark-connect
-#    - snowflake-ml-python
+  downstreams:
+    - snowpark-connect
+    - snowflake-ml-python
 
 about:
   home: https://s3fs.readthedocs.io
