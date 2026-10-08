@@ -23,8 +23,8 @@ requirements:
   run:
     - python
     - aiobotocore >=2.19.0,<4.0.0
-    - fsspec >=2026.9.0,<2026.9.1
-    - aiohttp !=4.0.0a0,!=4.0.0a1,>=3.9.0
+    - fsspec =={{ version }}
+    - aiohttp >=3.9.0,!=4.0.0a0,!=4.0.0a1
 
 # Separators error on windows:
 # E -     'C:\\cygwin64\\tmp\\pytest-of-builder-admin\\pytest-4\\test_get_directory_recursive1\\target\\file',
